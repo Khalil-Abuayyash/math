@@ -4,6 +4,8 @@ config.pixel_width = 1080   # Set width (e.g., Full HD resolution)
 config.pixel_height = 1920  # Set height
 config.frame_rate = 30      # Set frame rate
 
+
+# Hamada 
 class DivisionByZero(Scene):
     def construct(self):
         # Title
