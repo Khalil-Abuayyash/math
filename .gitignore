@@ -27,7 +27,9 @@ share/python-wheels/
 MANIFEST
 
 #Manim
-media/
+# Ignore all media folders
+**/media/
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
