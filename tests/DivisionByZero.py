@@ -1,40 +1,53 @@
 from manim import *
 
-config.pixel_width = 1080   # Set width (e.g., Full HD resolution)
-config.pixel_height = 1920  # Set height
-config.frame_rate = 30      # Set frame rate
+config.pixel_width = 1080   # Video width
+config.pixel_height = 1920  # Video height
+config.frame_rate = 30      # Frame rate
 
-
-# Hamada 
 class DivisionByZero(Scene):
     def construct(self):
-        # Title
-        title = Text("Why Dividing by 0 is Undefined", font_size=60).set_color(BLUE)
+        # Example: 6 / 2 = 3
+        example_title = Text("Example: 6 ÷ 2 = ?", font_size=60).set_color(YELLOW)
+        self.play(Write(example_title))
+        self.wait(6)
+        self.play(example_title.animate.to_edge(UP))  # Move title to the top
 
-        # Explanation Text
-        explanation = Tex(
-            r"When dividing a number by 0, the operation has no meaning.\\"
-            r"\text{Mathematically, division is finding how many times}\\"
-            r"0 fits into a number, which is impossible.",
-            font_size=50
-        ).set_color(RED).shift(UP * 1)
+        # Subtraction sequence
+        sequence_group = VGroup()  # Group for alignment
 
-        # Example: 5 ÷ 0
-        example = MathTex(r"5 \div 0 \text{ is undefined}", font_size=48).set_color(RED).shift(DOWN * 1)
+        # Step 1: 6 - 2 = 4
+        step1 = VGroup(
+            Tex("6", font_size=60).set_color(WHITE),
+            Tex("- 2", font_size=60).set_color(BLUE),
+            Tex("= 4", font_size=60).set_color(GREEN),
+        ).arrange(RIGHT, buff=0.5)  # Arrange elements horizontally
+        sequence_group.add(step1)
 
-        # Animations
-        self.play(Write(title))
-        self.wait(1)
-        self.play(title.animate.to_edge(UP))  # Move title to the top
-        self.play(Write(explanation))
+        # Step 2: 4 - 2 = 2
+        step2 = VGroup(
+            Tex("4", font_size=60).set_color(WHITE),
+            Tex("- 2", font_size=60).set_color(BLUE),
+            Tex("= 2", font_size=60).set_color(GREEN),
+        ).arrange(RIGHT, buff=0.5)  # Arrange elements horizontally
+        sequence_group.add(step2)
+
+        # Step 3: 2 - 2 = 0
+        step3 = VGroup(
+            Tex("2", font_size=60).set_color(WHITE),
+            Tex("- 2", font_size=60).set_color(BLUE),
+            Tex("= 0", font_size=60).set_color(GREEN),
+        ).arrange(RIGHT, buff=0.5)  # Arrange elements horizontally
+        sequence_group.add(step3)
+
+        # Position the group vertically
+        sequence_group.arrange(DOWN, buff=0.7).move_to(ORIGIN)
+
+        # Animate each step
+        for step in sequence_group:
+            self.play(Write(step))
+            self.wait(4)
+
+        # Answer
+        answer = Text("6 ÷ 2 = 3 (3 subtractions)", font_size=50).set_color(PURPLE).next_to(sequence_group, DOWN, buff=1)
+        self.play(Write(answer))
         self.wait(3)
-        self.play(Write(example))
-        self.wait(2)
-
-        # Emphasizing the "undefined"
-        undefined_text = Text("Undefined!", font_size=60, color=YELLOW).scale(1.2).next_to(example, DOWN)
-        self.play(Write(undefined_text))
-        self.wait(3)
-
-        # Fade out
-        self.play(FadeOut(title, explanation, example, undefined_text))
