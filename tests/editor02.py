@@ -148,7 +148,7 @@ class CodeEditorFrame(Scene):
 
         # **List to keep track of output lines**
         output_texts = VGroup()
-
+        
         # **Step 3: Animate the Pointer with the Loop**
         nums = [0, 1, 2, 3, 4, 5]
         for i, num in enumerate(nums):
@@ -193,6 +193,27 @@ class CodeEditorFrame(Scene):
             else:
                 output_line.next_to(output_texts[-1], DOWN, aligned_edge=LEFT)
             output_texts.add(output_line)
+
+            if len(output_texts) == 1:
+                pointer1 = Arrow(
+                    start=output_texts[0].get_left() + LEFT * 0.8,  # Increased UP multiplier for higher position
+                    end=output_texts[0].get_left() + LEFT * 0.2,    # Pointing down to the number
+                    buff=0,
+                    color=BLUE,
+                    stroke_width=20,      # Increased stroke width for thickness
+                    tip_length=0.5,      # Increased tip length for a larger arrowhead
+                ).scale(1.5)  # Scaled the arrow to make it larger overall
+                self.play(GrowArrow(pointer1))
+            
+            target1 = output_texts[i]
+            # **Move the Pointer to the Current Element**
+            # Recalculate start and end positions for the arrow
+            new_start1 = target1.get_left() + LEFT * 0.8  # Higher above the number
+            new_end1 = target1.get_left() + LEFT * 0.2    # Pointing down to the number
+            self.play(pointer1.animate.put_start_and_end_on(new_start1, new_end1), run_time=0.5)
+            self.wait(0.3)
+
+            self.wait(1)
             self.play(Write(output_line))
             self.wait(0.2)
 
