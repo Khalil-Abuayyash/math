@@ -43,8 +43,13 @@ class CodeEditorFrame(Scene):
 
         # **1. Aligning Code Statements to Appear from the Left**
         # Position line0 at the top inside the content area, aligned to the left edge of the header bar
+        # Calculate the left edge of the header bar
+        header_left_edge = header_bar.get_left() + RIGHT * 1  # Adjust buff as needed
+
         # Position line0 aligned to the left edge
         line0.next_to(content_area.get_top(), DOWN, buff=1).to_edge(LEFT, buff=1.5)
+        # Remove the shift to the right (indent_unit) to align to the left
+        # If indentation is needed, apply it to subsequent lines only
 
         # Position line1 below line0, aligned to the left of line0
         line1.next_to(line0, DOWN, aligned_edge=LEFT, buff=0.3)
@@ -54,7 +59,7 @@ class CodeEditorFrame(Scene):
         line2.shift(indent_unit)  # Indentation applied only to line2
 
         # Add all elements to the scene
-        # Add the frame elements first
+        # Add the frame elements first (without any changes)
         self.add(editor_background)
         self.add(header_bar)
         self.add(green_circle, yellow_circle, red_circle)
@@ -65,14 +70,15 @@ class CodeEditorFrame(Scene):
         self.play(Write(line0))
         self.wait(0.5)
 
-        # **Highlight variable assignment**
+        # **Replace SurroundingRectangle with Yellow Highlight**
+        # Highlight 'nums = [0, 1, 2, 3, 4, 5]' to indicate variable assignment
         nums_highlight = Rectangle(
             width=line0.width + 0.5,  # Add some padding
             height=line0.height + 0.2,
             color=YELLOW,
             fill_opacity=0.2,  # Semi-transparent
             stroke_width=0,
-        ).move_to(line0)
+        ).move_to(line0)  # Align the highlight with the text
         self.play(FadeIn(nums_highlight))
         self.wait(0.5)
         self.play(FadeOut(nums_highlight))
@@ -86,6 +92,7 @@ class CodeEditorFrame(Scene):
         self.wait(0.5)
 
         # **Emphasize the importance of indentation**
+        # Create a brace pointing to the indentation
         indent_brace = BraceBetweenPoints(
             line1.get_left(), line2.get_left(), direction=RIGHT, color=YELLOW
         )
@@ -129,36 +136,33 @@ class CodeEditorFrame(Scene):
         # **Step 2: Add the Pointer (Arrow Above Numbers)**
         # Create a downward-pointing arrow above the first element with increased size
         pointer = Arrow(
-            start=nums_array[0].get_top() + UP * 0.8,
-            end=nums_array[0].get_top() + UP * 0.2,
+            start=nums_array[0].get_top() + UP * 0.8,  # Increased UP multiplier for higher position
+            end=nums_array[0].get_top() + UP * 0.2,    # Pointing down to the number
             buff=0,
             color=YELLOW,
-            stroke_width=20,
-            tip_length=0.5,
-        ).scale(1.5)
+            stroke_width=20,      # Increased stroke width for thickness
+            tip_length=0.5,      # Increased tip length for a larger arrowhead
+        ).scale(1.5)  # Scaled the arrow to make it larger overall
         self.play(GrowArrow(pointer))
         self.wait(1)
 
         # **List to keep track of output lines**
         output_texts = VGroup()
-<<<<<<< HEAD
-
-        # **Step 3: Animate the Loop with Highlighted Output Numbers**
-=======
         
         # **Step 3: Animate the Pointer with the Loop**
->>>>>>> b3a876f3394f17f686c469464f7f768c9cd73b1d
         nums = [0, 1, 2, 3, 4, 5]
         for i, num in enumerate(nums):
             target = nums_array[i]
 
-            # **Move the Yellow Pointer to the Current Element**
-            new_start = target.get_top() + UP * 0.8
-            new_end = target.get_top() + UP * 0.2
+            # **Move the Pointer to the Current Element**
+            # Recalculate start and end positions for the arrow
+            new_start = target.get_top() + UP * 0.8  # Higher above the number
+            new_end = target.get_top() + UP * 0.2    # Pointing down to the number
             self.play(pointer.animate.put_start_and_end_on(new_start, new_end), run_time=0.5)
             self.wait(0.3)
 
             # **Highlight 'for num in nums:'**
+            # Replace SurroundingRectangle with Yellow Highlight
             loop_highlight = Rectangle(
                 width=line1.width + 0.5,
                 height=line1.height + 0.2,
@@ -171,10 +175,11 @@ class CodeEditorFrame(Scene):
             self.play(FadeOut(loop_highlight))
 
             # **Highlight 'print(num * 2)'**
+            # Replace SurroundingRectangle with Yellow Highlight
             print_highlight = Rectangle(
                 width=line2.width + 0.5,
                 height=line2.height + 0.2,
-                color=RED,
+                color=YELLOW,
                 fill_opacity=0.2,
                 stroke_width=0,
             ).move_to(line2)
@@ -184,31 +189,11 @@ class CodeEditorFrame(Scene):
             # **Display Output in Output Box**
             output_line = Text(str(num * 2), font_size=30, color=WHITE)
             if len(output_texts) == 0:
-                output_line.next_to(output_box.get_top(), DOWN, buff=0.2).align_to(
-                    output_box.get_left(), LEFT
-                ).shift(RIGHT * 0.2)
+                output_line.next_to(output_box.get_top(), DOWN, buff=0.2).align_to(output_box.get_left(), LEFT).shift(RIGHT * 0.2)
             else:
                 output_line.next_to(output_texts[-1], DOWN, aligned_edge=LEFT)
             output_texts.add(output_line)
 
-<<<<<<< HEAD
-            # **Create a Highlight Around the Output Number**
-            output_highlight = Rectangle(
-                width=output_line.width + 0.3,
-                height=output_line.height + 0.2,
-                color=RED,
-                fill_opacity=0.2,  # Semi-transparent fill
-                stroke_width=2,
-            ).move_to(output_line)
-
-            # **Animate the Output Line and Highlight**
-            self.play(Write(output_line), FadeIn(output_highlight))
-            self.wait(0.5)
-
-            # Optional: Fade out the highlight before the next iteration
-            if i < len(nums) - 1:
-                self.play(FadeOut(output_highlight))
-=======
             if len(output_texts) == 1:
                 pointer1 = Arrow(
                     start=output_texts[0].get_left() + LEFT * 0.8,  # Increased UP multiplier for higher position
@@ -231,12 +216,10 @@ class CodeEditorFrame(Scene):
             self.wait(1)
             self.play(Write(output_line))
             self.wait(0.2)
->>>>>>> b3a876f3394f17f686c469464f7f768c9cd73b1d
 
             # Fade out the print highlight
             self.play(FadeOut(print_highlight))
 
-        # Optional: Keep the last output highlight on the screen, or fade it out
-        self.wait(2)
+        # Optional: Fade out the pointer after the loop completes
         self.play(FadeOut(pointer))
         self.wait(2)
