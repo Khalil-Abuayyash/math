@@ -18,13 +18,14 @@ class CombAttractsWater(Scene):
         end = faucet.get_bottom() + DOWN * 3
         end += shift
         
-        drops_num = 15
+        drops_num = 20
+        drops_dis = 0.3
         water_drops = VGroup(*[Dot(color=BLUE) for _ in range(drops_num)])
         for i, drop in enumerate(water_drops):
-            drop.move_to(start + DOWN * (i * 0.5))
+            drop.move_to(start + DOWN * (i * drops_dis))
 
-        comb = SVGMobject("comb.svg").scale(0.5)
-        comb.move_to(water_drops.get_right() + [3, 0, 0])
+        comb = SVGMobject("comb.svg").scale(0.8)
+        comb.move_to(water_drops.get_bottom() + [3, 1, 0])
         self.add(comb)
         self.wait()
 
@@ -40,7 +41,7 @@ class CombAttractsWater(Scene):
 
         for _ in range(3):  # Adjust for more repetitions
             self.play(*animate_droplets(water_drops), run_time=2, rate_func=linear)
-            self.play(*[drop.animate.set_opacity(1).move_to(start + DOWN * (i * 0.5))
+            self.play(*[drop.animate.set_opacity(1).move_to(start + DOWN * (i * drops_dis))
                         for i, drop in enumerate(water_drops)], run_time=0.1)
 
 
@@ -52,12 +53,15 @@ class CombAttractsWater(Scene):
         
         for i, drop in enumerate(deflected_water_drops):
             if i < 4:
-                drop.move_to(start + DOWN * (i * 0.5) + + RIGHT * i * 0.05)
-            if 4 <= i < 11:
-                drop.move_to(start + DOWN * (i * 0.5) + RIGHT * i * 0.1)
-            if i >= 11:
-                drop.move_to(start + DOWN * (i * 0.5) + RIGHT * i * 0.15)
-            # drop.move_to(start + DOWN * (i * 0.5) + RIGHT * i * 0.1)
+                drop.move_to(start + DOWN * (i * drops_dis) + + RIGHT * i * 0.01)
+            elif i < 8:
+                drop.move_to(start + DOWN * (i * drops_dis) + RIGHT * i * 0.015)
+            elif i < 12:
+                drop.move_to(start + DOWN * (i * drops_dis) + RIGHT * i * 0.02)
+            elif i < 16 :
+                drop.move_to(start + DOWN * (i * drops_dis) + RIGHT * i * 0.022)
+            else:
+                drop.move_to(start + DOWN * (i * drops_dis) + RIGHT * i * 0.024)
             
 
         self.play(Transform(water_drops, deflected_water_drops), run_time=1.5)

@@ -1,0 +1,60 @@
+<svg width="1600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1600" height="400" fill="#f0f0f0"/>
+
+  <!-- Top phospholipid layer -->
+  <g>
+    <!-- Repeat phospholipids across the width -->
+    <g id="phospholipid">
+      <circle cx="50" cy="159" r="10" fill="#ffd700"/>
+      <rect x="45" y="169" width="10" height="30" fill="#0000ff"/>
+    </g>
+    <use href="#phospholipid"/>
+    <use href="#phospholipid" transform="translate(20,0)"/>
+    <use href="#phospholipid" transform="translate(40,0)"/>
+    <use href="#phospholipid" transform="translate(60,0)"/>
+    <use href="#phospholipid" transform="translate(80,0)"/>
+    <use href="#phospholipid" transform="translate(100,0)"/>
+    <use href="#phospholipid" transform="translate(120,0)"/>
+    <use href="#phospholipid" transform="translate(140,0)"/>
+    <use href="#phospholipid" transform="translate(160,0)"/>
+    <use href="#phospholipid" transform="translate(180,0)"/>
+    <use href="#phospholipid" transform="translate(200,0)"/>
+    <use href="#phospholipid" transform="translate(220,0)"/>
+    <use href="#phospholipid" transform="translate(240,0)"/>
+    <use href="#phospholipid" transform="translate(260,0)"/>
+    <use href="#phospholipid" transform="translate(280,0)"/>
+    <use href="#phospholipid" transform="translate(300,0)"/>
+  </g>
+
+  <!-- Bottom phospholipid layer -->
+  <g transform="translate(0,200)">
+    <!-- Repeat phospholipids across the width -->
+    <g id="phospholipidBottom">
+      <rect x="45" y="0" width="10" height="30" fill="#0000ff"/>
+      <circle cx="50" cy="40" r="10" fill="#ffd700"/>
+    </g>
+    <use href="#phospholipidBottom"/>
+    <use href="#phospholipidBottom" transform="translate(20,0)"/>
+    <use href="#phospholipidBottom" transform="translate(40,0)"/>
+    <use href="#phospholipidBottom" transform="translate(60,0)"/>
+    <use href="#phospholipidBottom" transform="translate(80,0)"/>
+    <use href="#phospholipidBottom" transform="translate(100,0)"/>
+    <use href="#phospholipidBottom" transform="translate(120,0)"/>
+    <use href="#phospholipidBottom" transform="translate(140,0)"/>
+    <use href="#phospholipidBottom" transform="translate(160,0)"/>
+    <use href="#phospholipidBottom" transform="translate(180,0)"/>
+    <use href="#phospholipidBottom" transform="translate(200,0)"/>
+    <use href="#phospholipidBottom" transform="translate(220,0)"/>
+    <use href="#phospholipidBottom" transform="translate(240,0)"/>
+    <use href="#phospholipidBottom" transform="translate(260,0)"/>
+    <use href="#phospholipidBottom" transform="translate(280,0)"/>
+    <use href="#phospholipidBottom" transform="translate(300,0)"/>
+  </g>
+
+  <!-- Embedded proteins -->
+  <ellipse cx="100" cy="200" rx="20" ry="50" fill="#ff9900" stroke="#ffffff" stroke-width="0"/>
+  <ellipse cx="200" cy="200" rx="20" ry="50" fill="#ff9900" stroke="#ffffff" stroke-width="0"/>
+  <ellipse cx="300" cy="200" rx="20" ry="50" fill="#ff9900" stroke="#ffffff" stroke-width="0"/>
+
+</svg>

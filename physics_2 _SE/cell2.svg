@@ -1,0 +1,8 @@
+<svg width="100" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Phospholipid head -->
+  <circle cx="50" cy="40" r="10" fill="#ffd700"/>
+  
+  <!-- Hydrophobic tails -->
+  <path d="M 47 49 C 32 80, 15 120, 40 120" stroke="#0000ff" stroke-width="2" fill="transparent"/>
+  <path d="M 55 48 C 70 70, 90 100, 70 130" stroke="#0000ff" stroke-width="2" fill="transparent"/>
+</svg>

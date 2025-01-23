@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100">
+
+  <!-- Rubber rod -->
+  <rect x="50" y="40" width="300" height="20" rx="10" ry="10" fill="#d3d3d3" />
+  <!-- Define reusable circle with negative charge -->
+  <defs>
+    <g id="negative-charge">
+      <circle cx="0" cy="0" r="5" fill="#ff6666" />
+      <!-- <text x="-3" y="4" font-size="10" fill="#ffffff" font-family="Arial" font-weight="bold">−</text> -->
+      <rect x="-2.5" y="0" width="5" height="1" fill="#ffffff" />
+    </g>
+  </defs>
+  <!-- Reuse the negative charge -->
+  <use href="#negative-charge" x="70" y="50" />
+  <use href="#negative-charge" x="100" y="50" />
+  <use href="#negative-charge" x="130" y="50" />
+  <use href="#negative-charge" x="160" y="50" />
+  <use href="#negative-charge" x="190" y="50" />
+  <use href="#negative-charge" x="220" y="50" />
+  <use href="#negative-charge" x="250" y="50" />
+  <use href="#negative-charge" x="280" y="50" />
+  <use href="#negative-charge" x="310" y="50" />
+  <use href="#negative-charge" x="340" y="50" />
+</svg>
