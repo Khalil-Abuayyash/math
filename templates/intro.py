@@ -51,11 +51,6 @@ class VectorAcademyIntro(Scene):
         channel_name.next_to(brain_outline, DOWN)
         self.play(Write(channel_name), run_time=2)
 
-        # Add Tagline
-        # tagline = Text("Your ultimate physics, math, and CS platform", 
-        #                font_size=24, color=GRAY)
-        # tagline.next_to(channel_name, DOWN)
-        # self.play(FadeIn(tagline, shift=UP), run_time=2)
 
         # Final Glow Effect
         self.play(Indicate(brain_outline, color=BLUE, scale_factor=1.1), run_time=2)
