@@ -1,5 +1,4 @@
 from manim import *
-# config.background_color = "#ffffff"
 
 config.pixel_width = 1920
 config.pixel_height = 1080
