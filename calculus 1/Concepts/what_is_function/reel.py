@@ -1,6 +1,7 @@
 from manim import *
 import random
 
+#Finial file
 
 # Configure the video for a reel (1080x1920, 30fps) in portrait mode
 config.pixel_width = 1080
