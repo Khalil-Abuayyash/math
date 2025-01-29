@@ -60,7 +60,6 @@ class FunctionStory(Scene):
         self.play(FadeOut(person), FadeOut(machine), FadeOut(cola), FadeOut(output_text), FadeOut(input_text))
         
         
-        
         definition_word = Text("Definition:", font_size=50, color="#2ca9bc").to_edge(UP)
         definition1 = Text("A function is a rule that assigns", font_size=50, color="#2ca9bc")
         definition2 = Text("one element from the domain", font_size=50, color="#2ca9bc")
@@ -71,17 +70,6 @@ class FunctionStory(Scene):
         definition2.next_to(definition1, DOWN, buff=0.2)  # Shift definition2 down below definition1
         definition3.next_to(definition2, DOWN, buff=0.2)  # Shift definition2 down below definition1
 
-        # Play the animations
-        self.play(Write(definition_word))  # Title animation at the top
-        self.wait(1)
-        self.play(Write(definition1))  # Write the first line
-        self.wait(1)
-        self.play(Write(definition2))  # Write the second line
-        self.wait(1)
-        self.play(Write(definition3))  # Write the third line
-        self.wait(1)
-        
-
         # Load SVG images
         svg1 = SVGMobject("blob-5-svgrepo-com (1).svg").scale(1.5)
         svg2 = SVGMobject("blob-5-svgrepo-com.svg").scale(1.5)
@@ -89,9 +77,10 @@ class FunctionStory(Scene):
         # Arrange SVGs next to each other
         group = VGroup(svg1, svg2).arrange(RIGHT, buff=3)  # Adjust spacing with buff
 
-        # Center the group on the screen
+
         group.move_to(ORIGIN)
         group.shift(DOWN * 2)
+        
 
         # Function to get center point and place points inside the SVG
         def get_point_inside_svg(svg):
@@ -105,7 +94,7 @@ class FunctionStory(Scene):
             # Define an offset (adjust this to control the point placement inside the shape)
             offset_x = random.uniform(-width/4, width/4)  # Random offset within 1/4th of the width
             offset_y = random.uniform(-height/4, height/4)  # Random offset within 1/4th of the height
-            
+
             # Calculate the point inside the SVG by adding the offset to the center
             point = center + np.array([offset_x, offset_y, 0])
 
@@ -126,7 +115,7 @@ class FunctionStory(Scene):
             color=BLUE,
             path_arc=PI / 3,  # Curve the arrow with a specific arc
         )
-        
+
         arrow2 = Arrow(
             start=point3,
             end=point4,
@@ -136,17 +125,36 @@ class FunctionStory(Scene):
             path_arc=-PI / 3,  # Adjust the arc direction for variety
         )
 
-
-        # Add SVGs and arrows to the scene
-        self.play(FadeIn(group))
-        self.wait(1)
-
         # Highlight points and connect them
         dot1 = Dot(point1, color=RED)
         dot2 = Dot(point2, color=RED)
         dot3 = Dot(point3, color=RED)  # Third point
-        dot4 = Dot(point4, color=RED)  # Forth point
-        self.play(FadeIn(dot1), FadeIn(dot2), FadeIn(dot3), FadeIn(dot4))
+        dot4 = Dot(point4, color=RED)  # Fourth point
+
+        # Add SVGs and arrows to the scene
+        
+
+        self.play(Write(definition_word))  # Title animation at the top
+        self.wait(1)
+        
+        
+        self.play(Write(definition1))
+        self.wait(1) 
+        
+        self.play(FadeIn(group))
+        self.wait(1) 
+
+        
+        self.play(Write(definition2))
+        self.wait(1)
+        
+        self.play(FadeIn(dot1), FadeIn(dot3))
+        self.wait(1)
+        
+        self.play(Write(definition3))
+        self.wait(1)
+        
+        self.play(FadeIn(dot2), FadeIn(dot4))
         self.wait(1)
 
         # Draw the curved arrows
