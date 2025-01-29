@@ -29,7 +29,7 @@ class CollatzConjecture(Scene):
         self.wait(1)
 
         # First number (5) and its steps
-        steps = self.collatz_steps(5)
+        steps = self.collatz_steps(7)
         circles = []
         arrows = []
 
