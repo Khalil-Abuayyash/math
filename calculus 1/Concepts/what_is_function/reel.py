@@ -19,7 +19,7 @@ class FunctionStory(Scene):
         self.play(Write(intro_question))  # Title animation at the top
         self.wait(1)
         self.play(FadeIn(light_bulb, scale=0.5))  # Bring in the SVG below the title
-        self.wait(2)
+        self.wait(1)
         self.play(FadeOut(intro_question), FadeOut(light_bulb))  # Fade out title and SVG
         
         # Load SVG Assets
@@ -66,6 +66,7 @@ class FunctionStory(Scene):
         definition3 = Text("to exact element in the codomain", font_size=50, color="#2ca9bc")
 
         # Position the text objects below each other
+        
         definition1.next_to(definition_word, DOWN, buff=0.2)  # Shift definition1 down below definition_word
         definition2.next_to(definition1, DOWN, buff=0.2)  # Shift definition2 down below definition1
         definition3.next_to(definition2, DOWN, buff=0.2)  # Shift definition2 down below definition1
@@ -135,31 +136,31 @@ class FunctionStory(Scene):
         
 
         self.play(Write(definition_word))  # Title animation at the top
-        self.wait(1)
+        # self.wait(1)
         
         
         self.play(Write(definition1))
-        self.wait(1) 
+        self.wait(0.5) 
         
         self.play(FadeIn(group))
-        self.wait(1) 
+        self.wait(0.5) 
 
         
         self.play(Write(definition2))
-        self.wait(1)
+        self.wait(0.5)
         
         self.play(FadeIn(dot1), FadeIn(dot3))
-        self.wait(1)
+        self.wait(0.5)
         
         self.play(Write(definition3))
-        self.wait(1)
+        self.wait(0.5)
         
         self.play(FadeIn(dot2), FadeIn(dot4))
-        self.wait(1)
+        self.wait(0.5)
 
         # Draw the curved arrows
         self.play(Create(arrow1), Create(arrow2))
-        self.wait(2)
+        self.wait(1)
 
         # Fade out everything
         # self.play(FadeOut(group), FadeOut(dot1), FadeOut(dot2), FadeOut(dot3), FadeOut(dot4) , FadeOut(arrow1), FadeOut(arrow2))
