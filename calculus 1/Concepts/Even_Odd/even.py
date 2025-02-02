@@ -41,6 +41,8 @@ class EvenFunctionVisualization(Scene):
         
         self.play(FadeOut(human_svg), FadeIn(right_human), FadeIn(left_human))
         
+        
+        
         # Position copies 0.5 units left/right from y-axis
         # left_human.move_to(axes.c2p(-0.5, 1))
         # right_human.move_to(axes.c2p(0.5, 1))
