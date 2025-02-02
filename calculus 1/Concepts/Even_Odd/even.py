@@ -32,16 +32,18 @@ class EvenFunctionVisualization(Scene):
 
 
         # Create two copies and position them symmetrically
+
         left_human = SVGMobject("left.svg").scale(1.5)
         right_human = SVGMobject("right.svg").scale(1.5)
-        right_human.next_to(left_human.get_right())
+        # right_human.next_to(left_human.get_right(),buff=0)
+        human = VGroup(left_human, right_human)
+        human.arrange(RIGHT, buff=0)
+
         
-        print(len(left_human))
+        # self.play(FadeOut(human_svg), FadeIn(right_human), FadeIn(left_human))
+        self.play(FadeOut(human_svg), FadeIn(human))
         
-        
-        self.play(FadeOut(human_svg), FadeIn(right_human), FadeIn(left_human))
-        
-        
+        self.wait(4)
         
         
         
