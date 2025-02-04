@@ -23,14 +23,6 @@ class EvenFunctionVisualization(Scene):
         self.play(Create(axes), Write(axes_labels))
         self.wait(1)
 
-        # Load and position the original human SVG
-        human_svg = SVGMobject("human.svg").scale(1.5)
-        human_svg.move_to(axes.c2p(0, 0))
-
-        # Add the original human SVG
-        self.play(FadeIn(human_svg))
-        self.wait(1)
-
         # Create two copies and position them symmetrically
         left_human = SVGMobject("left.svg").scale(1.5)
         right_human = SVGMobject("right.svg").scale(1.5)
@@ -40,13 +32,9 @@ class EvenFunctionVisualization(Scene):
         human.arrange(RIGHT, buff=0)
 
         # Transition from original to split humans
-        self.play(FadeOut(human_svg), FadeIn(human))
+        self.play(FadeIn(human))
         self.wait(1)
 
-        # Position copies symmetrically
-        left_human.move_to(axes.c2p(-0.5, 0))
-        right_human.move_to(axes.c2p(0.5, 0))
-
         # Animate left and right humans moving apart
-        self.play(left_human.animate.shift(LEFT ), right_human.animate.shift(RIGHT ))
+        self.play(left_human.animate.shift(LEFT), right_human.animate.shift(RIGHT), run_time=4)
         self.wait(4)
