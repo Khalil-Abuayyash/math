@@ -43,3 +43,5 @@ class EvenFunctionVisualization(Scene):
         self.play(Write(text))
         self.play(Write(equ))
         self.wait(4)
+
+
