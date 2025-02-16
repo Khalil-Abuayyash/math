@@ -49,24 +49,24 @@ class IncreasingFunctionScene(Scene):
         y4_label = Tex("$y_4$", color=WHITE).next_to(axes.c2p(0, 8), LEFT)
         
         # Create circles
-        circle1 = Circle(color=RED, radius=0.2)
-        circle1.move_to(axes.c2p(x1, y1) + 1*DOWN)
-        circle1.move_to(axes.c2p(x1, 4))
-        circle1.set_fill(RED, opacity=1)
+        circle1 = Circle(color=YELLOW, radius=0.2)
+        circle1.move_to(axes.c2p(x1, y1))
+        # circle1.move_to(axes.c2p(x1, 4))
+        circle1.set_fill(YELLOW, opacity=1)
         
         # Load and position person SVG at (x1, y1)
         person = SVGMobject("person.svg", color=WHITE).scale(0.6)
-        person.move_to(axes.c2p(x1, 4))  # Start at (x1, y1)
-        person.move_to(circle1.get_top() + 0.7 * UP)
+        # person.move_to(axes.c2p(x1, 4))  # Start at (x1, y1)
+        person.move_to(circle1.get_top())
 
-        circle2 = Circle(color=GRAY, radius=0.2)
+        circle2 = Circle(color=WHITE, radius=0.2)
         circle2.move_to(mountain.get_top() + 0.3 * UP)
-        circle2.set_fill(GRAY, opacity=1)
+        circle2.set_fill(WHITE, opacity=1)
         
-        circle3 = Circle(color=YELLOW, radius=0.2)
+        circle3 = Circle(color=BLUE, radius=0.2)
         circle3.move_to(axes.c2p(3, 2))
         circle3.move_to(axes.c2p(9.2, 4))
-        circle3.set_fill(YELLOW, opacity=1)
+        circle3.set_fill(BLUE, opacity=1)
         
         # Group all objects that need to be moved down
         graph_group = VGroup(
@@ -92,19 +92,19 @@ class IncreasingFunctionScene(Scene):
         self.play(FadeIn(circle1), FadeIn(circle2), FadeIn(circle3))
         
         # Draw paths A and B after circles are displayed
-        path_A = Line(circle1.get_center(), circle2.get_center(), color=BLUE)
-        path_B = Line(circle2.get_center(), circle3.get_center(), color=GREEN)
+        # path_A = Line(circle1.get_center(), circle2.get_center(), color=BLUE)
+        # path_B = Line(circle2.get_center(), circle3.get_center(), color=GREEN)
         
-        label_A = Tex("A", color=BLUE).next_to(path_A, LEFT)
-        label_B = Tex("B", color=GREEN).next_to(path_B, RIGHT)
+        # label_A = Tex("A", color=BLUE).next_to(path_A, LEFT)
+        # label_B = Tex("B", color=GREEN).next_to(path_B, RIGHT)
         
         # Animate drawing paths and labels
-        self.play(Create(path_A))
-        self.play(Write(label_A))
+        # self.play(Create(path_A))
+        # self.play(Write(label_A))
         self.wait(0.5)
         
-        self.play(Create(path_B))
-        self.play(Write(label_B))
+        # self.play(Create(path_B))
+        # self.play(Write(label_B))
         self.wait(0.5)
         
         # Introduce the person
@@ -128,10 +128,17 @@ class IncreasingFunctionScene(Scene):
         ]
         
         height = person.get_top() - person.get_bottom()
+        self.play(FadeOut(title))
+        equ = MathTex(r"f(x_2) \geq f(x_1) \quad \text{where} \quad x_2 > x_1").scale(1.5).shift(6 * UP).set_color(YELLOW)
         # Animate the person moving in steps
         for i in range(1, len(step_points)):
-            self.play(person.animate.move_to(step_points[i]), run_time=0.5) 
+            if i == 2:
+                self.play(person.animate.move_to(step_points[i]), Write(equ), run_time=0.5)
+            else:
+                self.play(person.animate.move_to(step_points[i]), run_time=0.5)
+
             self.wait(0.2)  # Pause briefly at each step
+
         self.play(person.animate.move_to(mountain.get_top() + height/2)) 
         self.wait(0.2)
         
@@ -146,9 +153,14 @@ class IncreasingFunctionScene(Scene):
             start_point_down + (end_point_down - start_point_down) * (i / num_steps_down)
             for i in range(num_steps_down + 1)
         ]
+
+        equ2 = MathTex(r"f(x_2) \leq f(x_1) \quad \text{where} \quad x_2 > x_1").scale(1.5).shift(6 * UP).set_color(BLUE)
         # Animate the person moving down in steps
         for i in range(1, len(step_points_down)):
-            self.play(person.animate.move_to(step_points_down[i]), run_time=0.5)
+            if i == 1:
+                self.play(person.animate.move_to(step_points_down[i]), Write(equ2), FadeOut(equ), run_time=0.5)
+            else:
+                self.play(person.animate.move_to(step_points_down[i]), run_time=0.5)
             self.wait(0.2)  # Pause briefly at each step
         # Final adjustment to ensure the person lands exactly at the end point
         self.play(person.animate.move_to(end_point_down), run_time=0.5)
